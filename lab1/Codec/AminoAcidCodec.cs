@@ -2,15 +2,8 @@ using System.Text;
 
 namespace GeneticSearch
 {
-    /// <summary>
-    /// Кодирование и раскодирование цепочек аминокислот алгоритмом
-    /// Run-Length Encoding (RLE). Серии из 1-2 одинаковых букв не сжимаются.
-    /// </summary>
     static class AminoAcidCodec
     {
-        /// <summary>
-        /// Раскодирует строку вида "8ATA3TCGC..." в полную цепочку аминокислот.
-        /// </summary>
         public static string RLDecoding(string amino_acids)
         {
             if (string.IsNullOrEmpty(amino_acids)) return "";
@@ -36,10 +29,6 @@ namespace GeneticSearch
             return decoded.ToString();
         }
 
-        /// <summary>
-        /// Кодирует полную цепочку аминокислот алгоритмом RLE. Серии длиной
-        /// 1 или 2 одинаковых символа записываются как есть, без цифры-счётчика.
-        /// </summary>
         public static string RLEncoding(string amino_acids)
         {
             if (string.IsNullOrEmpty(amino_acids)) return "";

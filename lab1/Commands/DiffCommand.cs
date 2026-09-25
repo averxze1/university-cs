@@ -5,10 +5,6 @@ using System.Linq;
 
 namespace GeneticSearch
 {
-    /// <summary>
-    /// Операция diff: считает, в скольких позициях различаются цепочки
-    /// аминокислот двух указанных белков.
-    /// </summary>
     class DiffCommand : ICommand
     {
         public string Name => "diff";

@@ -4,10 +4,6 @@ using System.Linq;
 
 namespace GeneticSearch
 {
-    /// <summary>
-    /// Операция mode: находит наиболее часто встречающуюся аминокислоту
-    /// в цепочке указанного белка (при равенстве - первую по алфавиту).
-    /// </summary>
     class ModeCommand : ICommand
     {
         public string Name => "mode";

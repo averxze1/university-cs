@@ -13,9 +13,6 @@ namespace GeneticSearch
             string outputFile = "FinalGenedata.txt";
             string myName = "Соколовский Марат";
 
-            // Каждая операция реализует ICommand и знает своё имя (search/diff/mode).
-            // Чтобы добавить новую операцию, достаточно написать класс, реализующий
-            // ICommand, и добавить его в этот список - остальной код менять не нужно.
             List<ICommand> availableCommands = new List<ICommand>
             {
                 new SearchCommand(),
@@ -54,9 +51,6 @@ namespace GeneticSearch
             }
         }
 
-        /// <summary>
-        /// Читает sequences.txt и сразу раскодирует цепочки аминокислот (RLE).
-        /// </summary>
         static List<GeneticData> LoadProteins(string sequencesFile)
         {
             if (!File.Exists(sequencesFile))
@@ -88,10 +82,6 @@ namespace GeneticSearch
             return proteins;
         }
 
-        /// <summary>
-        /// Читает commands.txt построчно и для каждой строки вызывает
-        /// соответствующую команду (search/diff/mode), записывая результат в sw.
-        /// </summary>
         static void RunCommands(string commandsFile, Dictionary<string, ICommand> commandsByName,
                                  List<GeneticData> proteins, StreamWriter sw)
         {

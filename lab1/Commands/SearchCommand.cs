@@ -3,10 +3,6 @@ using System.IO;
 
 namespace GeneticSearch
 {
-    /// <summary>
-    /// Операция search: ищет заданную последовательность аминокислот среди
-    /// всех белков и для каждого совпадения выводит организм и белок.
-    /// </summary>
     class SearchCommand : ICommand
     {
         public string Name => "search";
