@@ -6,12 +6,15 @@ namespace GeneticSearch
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            string sequencesFile = "Data/sequences.0.txt";
-            string commandsFile = "Data/commands.0.txt";
-            string outputFile = "FinalGenedata.txt";
-            string myName = "Соколовский Марат";
+            DecodingTests.RunAll();
+            return;
+
+            string sequencesFile = Config.SequencesFile;
+            string commandsFile  = Config.CommandsFile;
+            string outputFile    = Config.OutputFile;
+            string myName        = Config.StudentName;
 
             List<ICommand> availableCommands = new List<ICommand>
             {
@@ -43,7 +46,7 @@ namespace GeneticSearch
                     RunCommands(commandsFile, commandsByName, proteins, sw);
                 }
 
-                Console.WriteLine("Файл genedata.txt успешно создан!");
+                Console.WriteLine("Файл FinalGenedata.txt успешно создан!");
             }
             catch (Exception ex)
             {

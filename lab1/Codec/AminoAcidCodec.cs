@@ -28,28 +28,5 @@ namespace GeneticSearch
             }
             return decoded.ToString();
         }
-
-        public static string RLEncoding(string amino_acids)
-        {
-            if (string.IsNullOrEmpty(amino_acids)) return "";
-
-            StringBuilder encoded = new StringBuilder();
-            int i = 0;
-            while (i < amino_acids.Length)
-            {
-                char current = amino_acids[i];
-                int count = 1;
-                while (i + count < amino_acids.Length && amino_acids[i + count] == current)
-                    count++;
-
-                if (count >= 3)
-                    encoded.Append(count).Append(current);
-                else
-                    encoded.Append(current, count);
-
-                i += count;
-            }
-            return encoded.ToString();
-        }
     }
 }
