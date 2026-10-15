@@ -7,6 +7,8 @@ namespace CatAndMouse
     {
         static void Main(string[] args)
         {
+            PlayerTests.RunAll();
+            
             string inputFile  = args.Length > 0 ? args[0] : "Data/1.ChaseData.txt";
             string outputFile = args.Length > 1 ? args[1] : "Data/NewPursuitLog.txt";
 
