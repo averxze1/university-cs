@@ -6,61 +6,76 @@ namespace TextTokenizer
     {
         public static void RunAll()
         {
-            Console.WriteLine("=== Запуск тестов ===\n");
+            Console.WriteLine("=== ЗАПУСК ТЕСТОВ ===\n");
 
             TestParser();
             TestAnalyzer();
 
-            Console.WriteLine("\n=== Тесты завершены ===");
+            Console.WriteLine("\n=== ТЕСТЫ ЗАВЕРШЕНЫ ===");
         }
 
         private static void TestParser()
         {
-            Console.WriteLine("Тест Парсера:");
+            Console.WriteLine("--- ТЕСТ 1: Парсер ---");
             ITextParser parser = new RegexTextParser();
-
+            
             string input = "Привет, мир! Это тест-драйв 2024.";
             Text text = parser.Parse(input);
 
+            Console.WriteLine($"Входной текст: \"{input}\"");
+            Console.WriteLine($"Найдено предложений: {text.Sentences.Count} (ожидалось 2)");
+
             if (text.Sentences.Count == 2)
-                Console.WriteLine("[OK] Парсер правильно определил количество предложений.");
+                Console.WriteLine("[OK] Количество предложений верное.\n");
             else
-                Console.WriteLine($"[FAIL] Ожидалось 2 предложения, найдено {text.Sentences.Count}");
+                Console.WriteLine("[FAIL] Ошибка в количестве предложений!\n");
 
             var sentence1 = text.Sentences[0];
-            if (sentence1.Tokens.Count == 4)
-                Console.WriteLine("[OK] Парсер правильно разбил первое предложение на токены.");
-            else
-                Console.WriteLine($"[FAIL] Ожидалось 4 токена в первом предложении, найдено {sentence1.Tokens.Count}");
+            Console.WriteLine($"Первое предложение: \"{sentence1.Render()}\"");
+            Console.WriteLine($"Количество токенов: {sentence1.Tokens.Count} (ожидалось 4: 'Привет', ',', 'мир', '!')");
             
+            Console.Write("Токены: ");
+            foreach (var t in sentence1.Tokens)
+            {
+                Console.Write($"[{t.Text}] ");
+            }
             Console.WriteLine();
+
+            if (sentence1.Tokens.Count == 4)
+                Console.WriteLine("[OK] Разбиение на токены верное.\n");
+            else
+                Console.WriteLine("[FAIL] Ошибка в разбиении на токены!\n");
         }
 
         private static void TestAnalyzer()
         {
-            Console.WriteLine("Тест Анализатора:");
+            Console.WriteLine("--- ТЕСТ 2: Анализатор ---");
             ITextParser parser = new RegexTextParser();
             
-            string input = "Как дела? Я делаю уроки.";
+            string input = "Это тест. Как дела?";
             Text text = parser.Parse(input);
             TextAnalyzer analyzer = new TextAnalyzer(text);
 
-            var wordsInQuestions = analyzer.FindWordsInQuestions(3);
-            if (wordsInQuestions.Count == 1 && wordsInQuestions[0] == "Как")
-                Console.WriteLine("[OK] Поиск слов в вопросах работает верно.");
-            else
-                Console.WriteLine("[FAIL] Поиск слов в вопросах работает некорректно.");
+            Console.WriteLine($"Входной текст: \"{input}\"");
 
-            analyzer.ReplaceWordsInSentence(1, 4, "X");
+            var words = analyzer.FindWordsInQuestions(3);
+            Console.WriteLine($"Ищем слова длины 3 в вопросах. Найдено: [{string.Join(", ", words)}] (ожидалось 'Как')");
             
-            string secondSentence = text.Sentences[1].Render();
-            
-            if (secondSentence.Contains("X"))
-                Console.WriteLine("[OK] Замена слов работает верно.");
+            if (words.Contains("Как"))
+                Console.WriteLine("[OK] Поиск в вопросах верный.\n");
             else
-                Console.WriteLine("[FAIL] Замена слов не сработала.");
+                Console.WriteLine("[FAIL] Поиск в вопросах не сработал!\n");
 
-            Console.WriteLine();
+            Console.WriteLine("Заменяем слова длины 4 в первом предложении на 'X'...");
+            analyzer.ReplaceWordsInSentence(0, 4, "X");
+            
+            string resultText = text.Sentences[0].Render();
+            Console.WriteLine($"Текст после замены: \"{resultText}\" (ожидалось \"Это X.\")");
+
+            if (resultText.Contains("X") && !resultText.Contains("тест"))
+                Console.WriteLine("[OK] Замена слов верная.\n");
+            else
+                Console.WriteLine("[FAIL] Замена слов не сработала!\n");
         }
     }
 }
