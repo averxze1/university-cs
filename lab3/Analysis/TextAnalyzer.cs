@@ -5,8 +5,6 @@ namespace TextTokenizer
 {
     class TextAnalyzer
     {
-        private static readonly HashSet<char> Vowels = new HashSet<char>("aeiouyаеёиоуыэюя");
-
         private readonly Text text;
 
         public TextAnalyzer(Text text)
@@ -94,7 +92,7 @@ namespace TextTokenizer
         private static bool StartsWithConsonant(string word)
         {
             char c = char.ToLowerInvariant(word[0]);
-            return char.IsLetter(c) && !Vowels.Contains(c);
+            return char.IsLetter(c) && !Rules.Vowels.Contains(c);
         }
     }
 }
