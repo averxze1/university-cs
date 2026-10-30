@@ -38,10 +38,10 @@ namespace TextTokenizer
 
                 bool isWord = WordStartRegex.IsMatch(value) || char.IsDigit(value[0]);
 
-                ISentenceToken token = isWord
+                Token token = isWord
                     ? new Word(value, hasLeadingSpace)
                     : new Punctuation(value, hasLeadingSpace);
-
+                    
                 sentence.Add(token);
             }
 

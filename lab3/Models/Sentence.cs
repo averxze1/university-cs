@@ -6,13 +6,14 @@ namespace TextTokenizer
 {
     class Sentence
     {
-        private readonly List<ISentenceToken> tokens = new List<ISentenceToken>();
+        private readonly List<Token> tokens = new List<Token>();
 
-        public IReadOnlyList<ISentenceToken> Tokens => tokens;
-
+        public IReadOnlyList<Token> Tokens => tokens;
         public IEnumerable<Word> Words => tokens.OfType<Word>();
 
         public int WordCount => Words.Count();
+        public int Length => Render().Length;
+        public bool IsQuestion => Render().TrimEnd().EndsWith("?");
 
         public string Render()
         {
@@ -26,21 +27,17 @@ namespace TextTokenizer
             return sb.ToString();
         }
 
-        public int Length => Render().Length;
-
-        public bool IsQuestion => Render().TrimEnd().EndsWith("?");
-
-        public void Add(ISentenceToken token)
+        public void Add(Token token)
         {
             tokens.Add(token);
         }
 
-        public void Remove(ISentenceToken token)
+        public void Remove(Token token)
         {
             tokens.Remove(token);
         }
 
-        public void Replace(ISentenceToken oldToken, ISentenceToken newToken)
+        public void Replace(Token oldToken, Token newToken)
         {
             int index = tokens.IndexOf(oldToken);
             if (index >= 0)

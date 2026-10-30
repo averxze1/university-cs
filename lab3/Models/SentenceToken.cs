@@ -1,32 +1,18 @@
 namespace TextTokenizer
 {
-    interface ISentenceToken
+    class Word : Token
     {
-        string Text { get; }
-        bool HasLeadingSpace { get; }
-    }
-
-    class Word : ISentenceToken
-    {
-        public string Text { get; }
-        public bool HasLeadingSpace { get; }
-
-        public Word(string text, bool hasLeadingSpace)
-        {
-            Text = text;
-            HasLeadingSpace = hasLeadingSpace;
+        public Word(string text, bool hasLeadingSpace) 
+            : base(text, hasLeadingSpace) 
+        { 
         }
     }
 
-    class Punctuation : ISentenceToken
+    class Punctuation : Token
     {
-        public string Text { get; }
-        public bool HasLeadingSpace { get; }
-
-        public Punctuation(string text, bool hasLeadingSpace)
-        {
-            Text = text;
-            HasLeadingSpace = hasLeadingSpace;
+        public Punctuation(string text, bool hasLeadingSpace) 
+            : base(text, hasLeadingSpace) 
+        { 
         }
     }
 }

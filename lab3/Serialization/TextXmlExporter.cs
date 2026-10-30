@@ -24,8 +24,8 @@ namespace TextTokenizer
             foreach (Sentence sentence in text.Sentences)
             {
                 SentenceXml sentenceXml = new SentenceXml();
-
-                foreach (ISentenceToken token in sentence.Tokens)
+                
+                foreach (Token token in sentence.Tokens)
                 {
                     if (token is Word word)
                         sentenceXml.Items.Add(new WordXml(word.Text));
