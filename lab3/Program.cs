@@ -8,6 +8,8 @@ namespace TextTokenizer
     {
         static void Main(string[] args)
         {
+            TextTests.RunAll();
+            
             string inputFile      = args.Length > 0 ? args[0] : "Data/text.txt";
             string stopWordsFile  = args.Length > 1 ? args[1] : "Data/stopwords_ru.txt";
             string reportFile     = args.Length > 2 ? args[2] : "Data/Report.txt";
