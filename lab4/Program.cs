@@ -108,7 +108,7 @@ namespace TextTokenizer
 
         static void WriteReplacement(StreamWriter sw, TextAnalyzer analyzer, Text text)
         {
-            int sentenceIndex = 3;
+            int sentenceIndex = 0;
             int wordLength = 6;
             string replacement = "СЛОВО";
             int replaced = analyzer.ReplaceWordsInSentence(sentenceIndex, wordLength, replacement);
