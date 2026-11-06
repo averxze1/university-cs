@@ -37,15 +37,6 @@ namespace TextTokenizer
 
                 TextAnalyzer analyzer = new TextAnalyzer(text);
 
-                using (StreamWriter sw = new StreamWriter(reportFile))
-                {
-                    WriteSentencesByWordCount(sw, analyzer);
-                    WriteSentencesByLength(sw, analyzer);
-                    WriteQuestionWords(sw, analyzer);
-                    WriteConsonantRemoval(sw, analyzer, text);
-                    WriteReplacement(sw, analyzer, text);
-                    WriteStopWordsRemoval(sw, analyzer, text, stopWordsFile);
-                }
                 Concordance concordance = new Concordance();
                     concordance.Build(text);
 
@@ -58,6 +49,16 @@ namespace TextTokenizer
                     }
                 }
                 Console.WriteLine($"Файл {concordanceFile} успешно создан!");
+
+                using (StreamWriter sw = new StreamWriter(reportFile))
+                {
+                    WriteSentencesByWordCount(sw, analyzer);
+                    WriteSentencesByLength(sw, analyzer);
+                    WriteQuestionWords(sw, analyzer);
+                    WriteConsonantRemoval(sw, analyzer, text);
+                    WriteReplacement(sw, analyzer, text);
+                    WriteStopWordsRemoval(sw, analyzer, text, stopWordsFile);
+                }
 
                 TextXmlExporter.Export(text, xmlOutputFile);
 
