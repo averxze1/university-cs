@@ -14,6 +14,7 @@ namespace TextTokenizer
             string stopWordsFile  = args.Length > 1 ? args[1] : "Data/stopwords_ru.txt";
             string reportFile     = args.Length > 2 ? args[2] : "Data/Report.txt";
             string xmlOutputFile  = args.Length > 3 ? args[3] : "Data/text_export.xml";
+            string concordanceFile = args.Length > 4 ? args[4] : "Data/Concordance.txt";
 
             if (!File.Exists(inputFile))
             {
@@ -45,6 +46,18 @@ namespace TextTokenizer
                     WriteReplacement(sw, analyzer, text);
                     WriteStopWordsRemoval(sw, analyzer, text, stopWordsFile);
                 }
+                Concordance concordance = new Concordance();
+                    concordance.Build(text);
+
+                using (StreamWriter cw = new StreamWriter(concordanceFile))
+                {           
+                    cw.WriteLine("Concordance:");
+                    foreach (string line in concordance.GetReport())
+                    {
+                    cw.WriteLine(line);
+                    }
+                }
+                Console.WriteLine($"Файл {concordanceFile} успешно создан!");
 
                 TextXmlExporter.Export(text, xmlOutputFile);
 
